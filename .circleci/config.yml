@@ -1,0 +1,35 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      # new all-in-one docker image
+      - image: fr3akyphantom/droid-builder:latest
+    environment:
+      MANIFEST_BRANCH: 'android-9.0'
+      VERSION: '3.0.0'
+      VENDOR: 'lenovo'
+      CODENAME: 'a6000'
+      FLAVOR: 'eng'
+      MAINTAINER: '@kshitijvermaa'
+      TEST_BUILD: 'true'
+      CHANGELOG: |
+        - Initial test build
+    working_directory: /home/builder/pitchblack
+    steps:
+      - run:
+          name: AIO Build
+          command: |
+           
+            wget -q https://raw.githubusercontent.com/PitchBlackRecoveryProject/vendor_utils/pb/build.sh
+            source build.sh
+          
+            
+workflows:
+  version: 2.1
+  build_and_test:
+    jobs:
+      - build:
+          context: org-global
+          filters:
+            branches:
+              only: 'android-9.0'
