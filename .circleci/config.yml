@@ -5,7 +5,7 @@ jobs:
       # new all-in-one docker image
       - image: fr3akyphantom/droid-builder:latest
     environment:
-      MANIFEST_BRANCH: 'android-9.0'
+      MANIFEST_BRANCH: 'android-10.0'
       VERSION: '3.0.0'
       VENDOR: 'lenovo'
       CODENAME: 'a6000'
@@ -32,4 +32,4 @@ workflows:
           context: org-global
           filters:
             branches:
-              only: 'android-9.0'
+              only: 'android-10.0'
