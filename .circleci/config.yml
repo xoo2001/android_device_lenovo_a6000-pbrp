@@ -2,33 +2,34 @@ version: 2.1
 jobs:
   build:
     docker:
-      # new all-in-one docker image
-      - image: fr3akyphantom/droid-builder:latest
+      # Use this New Image for Starting things up
+      - image: fr3akyphantom/droid-runner:latest # DO Not Change
     environment:
       MANIFEST_BRANCH: 'android-10.0'
       VERSION: '3.0.0'
+      MAINTAINER: '@PBRP team'
       VENDOR: 'lenovo'
       CODENAME: 'a6000'
-      FLAVOR: 'eng'
-      MAINTAINER: '@kshitijvermaa'
+      BUILD_LUNCH: 'omni_a6000-eng'
+      FLAVOR: "eng"
       TEST_BUILD: 'true'
       CHANGELOG: |
-        - Initial test build
-    working_directory: /home/builder/pitchblack
+         Initial Test Build
+    working_directory: /home/builder/
     steps:
+      - setup_remote_docker:
+          version: 19.03.8
       - run:
-          name: AIO Build
+          name: "ALL IN REMOTE"
           command: |
             curl -sL https://raw.githubusercontent.com/PitchBlackRecoveryProject/vendor_utils/Tess/remote_build.sh -o build.sh
             source build.sh
-          
-            
 workflows:
-  version: 2.1
-  build_and_test:
+  version: 2
+  remote_builder:
     jobs:
       - build:
-          context: org-global
           filters:
             branches:
               only: 'android-10.0'
+          context: org-global
