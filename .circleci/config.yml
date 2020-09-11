@@ -19,8 +19,7 @@ jobs:
       - run:
           name: AIO Build
           command: |
-           
-            wget -q https://raw.githubusercontent.com/PitchBlackRecoveryProject/vendor_utils/Tess/remote_build.sh -o build.sh
+            curl -sL https://raw.githubusercontent.com/PitchBlackRecoveryProject/vendor_utils/Tess/remote_build.sh -o build.sh
             source build.sh
           
             
